@@ -33,6 +33,7 @@
     --tap: 44px;
     --bar: 96px;
   }
+  :root { color-scheme: light; }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html { -webkit-text-size-adjust: 100%; }
   body {
@@ -422,9 +423,11 @@
     var url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(text);
     var win = window.open(url, '_blank');
     if (!win) {
-      // Some in-app browsers block the new tab; hand the user a link instead.
+      // Some in-app browsers block the new tab; hand the user a link instead,
+      // and point at 👁 → Copy as the way out if the link is blocked too.
       $('note').className = 'note warn';
-      $('note').innerHTML = 'Tap here to open WhatsApp: <a href="' + url + '" target="_blank" rel="noreferrer">send now</a>';
+      $('note').innerHTML =
+        '<a href="' + url + '" target="_blank" rel="noreferrer">Tap to open WhatsApp</a> — or use 👁 to copy the message.';
       return;
     }
     flash('Sent to the owner on +' + digits, 'ok');
